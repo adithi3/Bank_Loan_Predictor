@@ -4,7 +4,7 @@ import pickle
 model = pickle.load(open('Model5.pkl', 'rb'))
 
 def run():
-    st.title("LOAN ELIGIBILITY PREDICTION SYSTEM")
+    st.title("LOAN ELIGIBILITY PREDICTION")
 
     ## Account No
     account_no = st.text_input('Account number')
