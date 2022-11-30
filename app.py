@@ -1,20 +1,22 @@
 import streamlit as st
-from PIL import Image
 import pickle
 
 model = pickle.load(open('Model5.pkl', 'rb'))
 
 def run():
-    img1 = Image.open('bank.png')
-    img1 = img1.resize((156,145))
-    st.image(img1,use_column_width=False)
-    st.title("Bank Loan Prediction using Machine Learning")
+    st.title("LOAN ELIGIBILITY PREDICTION SYSTEM")
 
     ## Account No
     account_no = st.text_input('Account number')
-
-    ## Full Name
-    fn = st.text_input('Full Name')
+    if len(account_no) > 0:
+        if len(account_no) < 8 or len(account_no) >12:
+            st.error("Invalid Account Number")
+        else:
+            fn = st.text_input('Full Name')
+            if fn == '':
+                st.error("please enter name!")
+            else:
+                st.write("Complete following details")
 
     ## For gender
     gen_display = ('Female','Male')
@@ -41,7 +43,7 @@ def run():
     emp_options = list(range(len(emp_display)))
     emp = st.selectbox("Employment Status",emp_options, format_func=lambda x: emp_display[x])
 
-    ## For Property status
+    ## For Property status python list lenghth is taken
     prop_display = ('Rural','Semi-Urban','Urban')
     prop_options = list(range(len(prop_display)))
     prop = st.selectbox("Property Area",prop_options, format_func=lambda x: prop_display[x])
@@ -52,16 +54,16 @@ def run():
     cred = st.selectbox("Credit Score",cred_options, format_func=lambda x: cred_display[x])
 
     ## Applicant Monthly Income
-    mon_income = st.number_input("Applicant's Monthly Income($)",value=0)
+    mon_income = st.number_input("Applicant's Monthly Income($)",min_value=0)
 
     ## Co-Applicant Monthly Income
-    co_mon_income = st.number_input("Co-Applicant's Monthly Income($)",value=0)
+    co_mon_income = st.number_input("Co-Applicant's Monthly Income($)",min_value=0)
 
     ## Loan AMount
-    loan_amt = st.number_input("Loan Amount",value=0)
+    loan_amt = st.number_input("Loan Amount",min_value=0)
 
     ## loan duration
-    # dur_display = ['2 Month','6 Month','8 Month','1 Year','16 Month']
+    # dur_display = ['2 Month','6 Month','8 Month','1 Year','16 Month']index start from 0
     dur_display = ['2 Month', '6 Month', '8 Month', '1 Year', '16 Month']
     dur_options = range(len(dur_display))
     dur = st.selectbox("Loan Duration",dur_options, format_func=lambda x: dur_display[x])
