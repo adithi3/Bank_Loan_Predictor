@@ -12,13 +12,9 @@ def run():
         if len(account_no) < 8 or len(account_no) >12:
             st.error("Invalid Account Number")
         else:
-            fn = st.text_input('Full Name')
-            if fn == '':
-                st.error("please enter name!")
-            else:
-                st.write("Complete following details")
+            st.write("Complete following details")
 
-    ## For gender
+    # ## For gender
     gen_display = ('Female','Male')
     gen_options = list(range(len(gen_display)))
     gen = st.selectbox("Gender",gen_options, format_func=lambda x: gen_display[x])
@@ -87,13 +83,13 @@ def run():
         ans = int("".join(lc))
         if ans == 0:
             st.error(
-                "Hello: " + fn +" || "
+                "Hello User" " || "
                 "Account number: "+account_no +' || '
                 'According to our Calculations, you will not get the loan from Bank'
             )
         else:
             st.success(
-                "Hello: " + fn +" || "
+                "Hello User" " || "
                 "Account number: "+account_no +' || '
                 'Congratulations!! you will get the loan from Bank'
             )
